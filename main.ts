@@ -1,10 +1,17 @@
-// cutest-picture-01 entry. Node 22, standard library only.
-// The picture sits beside this file. The grader names the output entry.png
-// and accepts a JPEG when the first bytes say so. Two runs copy the same bytes.
+// cutest-picture-01. Node 22 and the standard library only.
+// One cream kitten, sapphire eyes, a mint scarf, and a sleeping chick.
+// The grader keeps the name entry.png and reads the file's own first bytes.
+// Both runs copy those same bytes and nothing else.
 
 import { copyFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
-mkdirSync(outDir, { recursive: true });
-copyFileSync(new URL('./entry.png', import.meta.url), join(outDir, 'entry.png'));
+
+function writePicture(): void {
+  mkdirSync(outDir, { recursive: true });
+  const source = new URL('./entry.png', import.meta.url);
+  copyFileSync(source, join(outDir, 'entry.png'));
+}
+
+writePicture();
